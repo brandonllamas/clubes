@@ -28,5 +28,9 @@ class ParametersSeeder extends Seeder
         $parameter = new Parameter();
         $parameter->name = "Ajustes";
         $parameter->save();
+
+        $parameter = new Parameter();
+        $parameter->name = "Tipo venta";
+        $parameter->save();
     }
 }

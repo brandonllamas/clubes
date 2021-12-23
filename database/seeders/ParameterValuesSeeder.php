@@ -56,5 +56,17 @@ class ParameterValuesSeeder extends Seeder
         $parameterValue->idParameter = 2;
         $parameterValue->name = "ARS";
         $parameterValue->save();
+
+        //tipo venta
+
+        $parameterValue = new Value_parameter();
+        $parameterValue->idParameter = 3;
+        $parameterValue->name = "Alquiler";
+        $parameterValue->save();
+
+        $parameterValue = new Value_parameter();
+        $parameterValue->idParameter = 3;
+        $parameterValue->name = "Compra";
+        $parameterValue->save();
     }
 }
