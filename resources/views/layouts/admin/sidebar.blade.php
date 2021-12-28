@@ -25,24 +25,34 @@
     <div class="sidebar-heading">
         Modulos
     </div>
-    <li class="nav-item active">
-        <a class="nav-link" href="{{ route('cliente.index') }}">
-            <i class="fas fa-user"></i>
-            <span>Clientes</span></a>
-    </li>
 
-    <li class="nav-item">
+    <li class="nav-item {{ Request::is('administrator/usuarios') || Request::is('administrator/usuarios/*') ? 'active' : '' }}"  >
+        <a class="nav-link collapsed " href="#" data-toggle="collapse" data-target="#collapseUsuarios"
+            aria-expanded="true" aria-controls="collapseUsuarios">
+            <i class="fas fa-user"></i>
+            <span>Usuarios</span>
+        </a>
+        <div id="collapseUsuarios" class="collapse {{ Request::is('administrator/usuarios') || Request::is('administrator/usuarios/*') ? 'show' : '' }}" aria-labelledby="headingUtilities"
+            data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Usuarios:</h6>
+                <a class="collapse-item {{ Request::is('administrator/usuarios/cliente') || Request::is('administrator/usuarios/cliente/*') ? 'active' : '' }}" href="{{ route('cliente.index') }}">Ver Clientes</a>
+                <a class="collapse-item" href="#">Ver trabajadores</a>
+            </div>
+        </div>
+    </li>
+    <li class="nav-item {{ Request::is('administrator/servicios') || Request::is('administrator/servicios/*') ? 'active' : '' }}"  >
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseServicios"
             aria-expanded="true" aria-controls="collapseServicios">
             <i class="fas fa-fw fa-wrench"></i>
             <span>Servicios</span>
         </a>
-        <div id="collapseServicios" class="collapse" aria-labelledby="headingUtilities"
+        <div id="collapseServicios"  class="collapse  {{ Request::is('administrator/servicios') || Request::is('administrator/servicios/*') ? 'show' : '' }}" aria-labelledby="headingUtilities"
             data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Servicios:</h6>
-                <a class="collapse-item" href="utilities-color.html">Ver servicios</a>
-                <a class="collapse-item" href="utilities-border.html">Ver areas</a>
+                <a class="collapse-item " href="#">Ver servicios</a>
+                <a class="collapse-item {{ Request::is('administrator/servicios/area') || Request::is('administrator/servicios/area/*') ? 'active' : '' }} " href="{{ route('areas.index') }}">Ver areas</a>
             </div>
         </div>
     </li>
@@ -53,28 +63,28 @@
     <div class="sidebar-heading">
         Opciones
     </div>
-    <li class="nav-item active">
+    <li class="nav-item ">
         <a class="nav-link" href="#">
             <i class="fas fa-map-marked-alt"></i>
             <span>Permisos</span></a>
     </li>
 
-    <li class="nav-item active">
+    <li class="nav-item ">
         <a class="nav-link" href="#">
             <i class="fas fa-map-marked-alt"></i>
             <span>Soporte</span></a>
     </li>
-    <li class="nav-item active">
+    <li class="nav-item ">
         <a class="nav-link" href="#">
             <i class="fas fa-map-marked-alt"></i>
             <span>Manterimiento</span></a>
     </li>
-    <li class="nav-item active">
+    <li class="nav-item ">
         <a class="nav-link" href="#">
             <i class="fas fa-map-marked-alt"></i>
             <span>Ayuda</span></a>
     </li>
-    <li class="nav-item active">
+    <li class="nav-item ">
         <a class="nav-link" href="{{ route('logOut') }}">
             <i class="fas fa-sign-out-alt"></i>
             <span>Log out</span></a>
