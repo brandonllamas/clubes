@@ -34,6 +34,8 @@ Route::group(['prefix' => 'administrator', 'middleware' => 'auth'], function () 
         Route::post('/update',  [App\Http\Controllers\Admin\ClientController::class, 'updated'])->name('cliente.create.updated');
         Route::post('/activate',  [App\Http\Controllers\Admin\ClientController::class, 'activate'])->name('cliente.create.activate');
     });
-
+    Route::group(['prefix' => 'area'], function () {
+        Route::get('/',  [App\Http\Controllers\Admin\ClientController::class, 'index'])->name('cliente.index');
+    });
 
 });

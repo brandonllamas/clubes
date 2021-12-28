@@ -5,7 +5,7 @@
         <div class="sidebar-brand-icon rotate-n-15">
             <i class="fas fa-laugh-wink"></i>
         </div>
-        <div class="sidebar-brand-text mx-3">{{ env("APP_NAME") }} </div>
+        <div class="sidebar-brand-text mx-3">{{ env('APP_NAME') }} </div>
     </a>
 
     <!-- Divider -->
@@ -31,19 +31,34 @@
             <span>Clientes</span></a>
     </li>
 
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseServicios"
+            aria-expanded="true" aria-controls="collapseServicios">
+            <i class="fas fa-fw fa-wrench"></i>
+            <span>Servicios</span>
+        </a>
+        <div id="collapseServicios" class="collapse" aria-labelledby="headingUtilities"
+            data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Servicios:</h6>
+                <a class="collapse-item" href="utilities-color.html">Ver servicios</a>
+                <a class="collapse-item" href="utilities-border.html">Ver areas</a>
+            </div>
+        </div>
+    </li>
+    <!-- Divider -->
+    <hr class="sidebar-divider">
 
-      <!-- Divider -->
-      <hr class="sidebar-divider">
-
-      <!-- Heading -->
-      <div class="sidebar-heading">
-          Opciones
-      </div>
-      <li class="nav-item active">
+    <!-- Heading -->
+    <div class="sidebar-heading">
+        Opciones
+    </div>
+    <li class="nav-item active">
         <a class="nav-link" href="#">
             <i class="fas fa-map-marked-alt"></i>
             <span>Permisos</span></a>
     </li>
+
     <li class="nav-item active">
         <a class="nav-link" href="#">
             <i class="fas fa-map-marked-alt"></i>
@@ -59,7 +74,7 @@
             <i class="fas fa-map-marked-alt"></i>
             <span>Ayuda</span></a>
     </li>
-      <li class="nav-item active">
+    <li class="nav-item active">
         <a class="nav-link" href="{{ route('logOut') }}">
             <i class="fas fa-sign-out-alt"></i>
             <span>Log out</span></a>

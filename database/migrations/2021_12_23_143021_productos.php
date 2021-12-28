@@ -14,6 +14,20 @@ class Productos extends Migration
     public function up()
     {
         //
+        Schema::create('servicio', function (Blueprint $table) {
+            $table->id();
+            $table->string('name_servicio');
+            $table->longText('descripcion');
+            $table->integer('id_horario')->nullable();
+            $table->string('aforo')->nullable();
+            $table->string('price');//precio del area
+            $table->string('foto_logo')->nullable();
+            $table->string('foto_back')->nullable();
+            $table->integer('state')->default(1);
+            $table->rememberToken();
+            $table->timestamps();
+        });
+
         Schema::create('area', function (Blueprint $table) {
             $table->id();
             $table->string('area_name');
