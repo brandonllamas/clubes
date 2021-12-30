@@ -44,8 +44,8 @@
     <li class="nav-item {{ Request::is('administrator/servicios') || Request::is('administrator/servicios/*') ? 'active' : '' }}"  >
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseServicios"
             aria-expanded="true" aria-controls="collapseServicios">
-            <i class="fas fa-sliders-h"></i>
-
+            {{-- <i class="fas fa-sliders-h"></i> --}}
+            <i class="fas fa-store-alt"></i>
             <span>Servicios</span>
         </a>
         <div id="collapseServicios"  class="collapse  {{ Request::is('administrator/servicios') || Request::is('administrator/servicios/*') ? 'show' : '' }}" aria-labelledby="headingUtilities"
