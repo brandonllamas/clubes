@@ -78,7 +78,7 @@
                             <tbody>
                                 @foreach ($area as $key => $item)
                                     <tr>
-                                        <td>{{ $item->dni }}</td>
+                                        <td>{{ $item->id }}</td>
                                         <td>{{ $item->area_name }}</td>
                                         <td>{{ $item->price }}</td>
                                         <td>

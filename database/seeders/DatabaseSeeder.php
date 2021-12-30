@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
             ParametersSeeder::class, // Parametros
             ParameterValuesSeeder::class, // Valores parametros
             userSeed::class, //Usuarios
+            categoriaSeed::class, //categoriaSeed
         ]);
         User::factory(20)->create();
 

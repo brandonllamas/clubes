@@ -46,6 +46,7 @@ Route::group(['prefix' => 'administrator', 'middleware' => 'auth'], function () 
             Route::get('/',  [App\Http\Controllers\Admin\AreasController::class, 'index'])->name('areas.index');
             Route::get('/create',  [App\Http\Controllers\Admin\AreasController::class, 'create'])->name('areas.create.index');
             Route::get('/preview',  [App\Http\Controllers\Admin\AreasController::class, 'preview'])->name('areas.preview');
+            Route::post('/preview',  [App\Http\Controllers\Admin\AreasController::class, 'update'])->name('areas.preview.update');
             Route::post('/create',  [App\Http\Controllers\Admin\AreasController::class, 'store'])->name('areas.create.store');
         });
 

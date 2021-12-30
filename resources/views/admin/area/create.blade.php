@@ -38,7 +38,7 @@
                 <div class="alert alert-warning alert-dismissible" role="alert">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
                             aria-hidden="true">&times;</span></button>
-                    <p> {{ trans('restaurantes.corregirErrores') }} </p>
+                    <p>Corregir errores </p>
                     <ul>
                         @foreach ($errors->all() as $message)
                             <li>{{ $message }}</li>

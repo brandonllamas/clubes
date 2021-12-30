@@ -20,7 +20,8 @@ class Horarios extends Migration
             $table->string('id_area');
             $table->string('dia')->nullable();
             $table->string('horainicio')->nullable();
-            $table->string('horafinal');
+            $table->string('horafinal')->nullable();
+            $table->integer('cerrado')->nullable();
             $table->tinyInteger('state')->default(1);
             $table->timestamps();
         });

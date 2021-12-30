@@ -36,22 +36,23 @@
             data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Usuarios:</h6>
+                <a class="collapse-item" href="#">Ver Categorias</a>
                 <a class="collapse-item {{ Request::is('administrator/usuarios/cliente') || Request::is('administrator/usuarios/cliente/*') ? 'active' : '' }}" href="{{ route('cliente.index') }}">Ver Clientes</a>
-                <a class="collapse-item" href="#">Ver trabajadores</a>
             </div>
         </div>
     </li>
     <li class="nav-item {{ Request::is('administrator/servicios') || Request::is('administrator/servicios/*') ? 'active' : '' }}"  >
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseServicios"
             aria-expanded="true" aria-controls="collapseServicios">
-            <i class="fas fa-fw fa-wrench"></i>
+            <i class="fas fa-sliders-h"></i>
+
             <span>Servicios</span>
         </a>
         <div id="collapseServicios"  class="collapse  {{ Request::is('administrator/servicios') || Request::is('administrator/servicios/*') ? 'show' : '' }}" aria-labelledby="headingUtilities"
             data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Servicios:</h6>
-                <a class="collapse-item " href="#">Ver servicios</a>
+                <a class="collapse-item " href="#">Ver Categorias</a>
                 <a class="collapse-item {{ Request::is('administrator/servicios/area') || Request::is('administrator/servicios/area/*') ? 'active' : '' }} " href="{{ route('areas.index') }}">Ver areas</a>
             </div>
         </div>
@@ -63,27 +64,25 @@
     <div class="sidebar-heading">
         Opciones
     </div>
-    <li class="nav-item ">
-        <a class="nav-link" href="#">
-            <i class="fas fa-map-marked-alt"></i>
-            <span>Permisos</span></a>
+
+    <li class="nav-item {{ Request::is('administrator/ajustes') || Request::is('administrator/ajustes/*') ? 'active' : '' }}"  >
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseAjustes"
+            aria-expanded="true" aria-controls="collapseAjustes">
+            <i class="fas fa-sliders-h"></i>
+            <span>Ajustes</span>
+        </a>
+        <div id="collapseAjustes"  class="collapse  {{ Request::is('administrator/ajustes') || Request::is('administrator/ajustes/*') ? 'show' : '' }}" aria-labelledby="headingUtilities"
+            data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Ajustes:</h6>
+                <a class="collapse-item " href="#">Permisos</a>
+                <a class="collapse-item " href="#">Manterimiento</a>
+                <a class="collapse-item " href="#">Ayuda</a>
+                <a class="collapse-item " href="#">Ajustes Generales</a>
+            </div>
+        </div>
     </li>
 
-    <li class="nav-item ">
-        <a class="nav-link" href="#">
-            <i class="fas fa-map-marked-alt"></i>
-            <span>Soporte</span></a>
-    </li>
-    <li class="nav-item ">
-        <a class="nav-link" href="#">
-            <i class="fas fa-map-marked-alt"></i>
-            <span>Manterimiento</span></a>
-    </li>
-    <li class="nav-item ">
-        <a class="nav-link" href="#">
-            <i class="fas fa-map-marked-alt"></i>
-            <span>Ayuda</span></a>
-    </li>
     <li class="nav-item ">
         <a class="nav-link" href="{{ route('logOut') }}">
             <i class="fas fa-sign-out-alt"></i>

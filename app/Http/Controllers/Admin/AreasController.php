@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\area;
+use App\Models\categorias;
+use App\Models\productos;
+use App\Models\Value_Parameter;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
@@ -14,7 +17,7 @@ class AreasController extends Controller
     public function index(Request $request)
     {
         # code...
-        $area = area::where('state', '!=', 3)->paginate(10);
+        $area = productos::where('state', '!=', 3)->paginate(10);
 
         return view('admin.area.index', compact('area'));
     }
@@ -36,10 +39,13 @@ class AreasController extends Controller
             'area.required' => "area es requerido",
         ];
         $this->validate($request, $rules, $messages);
-        $area = area::where('id', $request->area)->first();
+        $area = productos::where('id', $request->area)->first();
         if ($area != null) {
             # code...
-            return view('admin.area.preview', compact('area'));
+            $dias = ["LUNES","MARTES","MIERCOLES","JUEVES","VIERNES","SABADO","DOMINGO"];
+            $categorias = categorias::where('state',1)->get();
+            $tiposdecompra = Value_Parameter::where('idParameter',3)->where('state',1)->get();
+            return view('admin.area.preview', compact('area','tiposdecompra','categorias','dias'));
         } else {
             Session::flash('message_error', "Area no encontrada");
             return back()->withInput();
@@ -82,10 +88,11 @@ class AreasController extends Controller
 
         DB::beginTransaction();
         try {
-            $area = new area();
-            $area->area_name = $request->name;
+            $area = new productos();
+            $area->producto_name = $request->name;
             $area->descripcion = $request->descripcion;
             $area->price = $request->price;
+            $area->tipo_pago = 9;
 
             $area->price = $request->price;
 
@@ -111,5 +118,83 @@ class AreasController extends Controller
         }
         Session::flash('message', 'Area creada');
         return redirect()->route('areas.index');
+    }
+
+    public function update(Request $request)
+    {
+        # code...
+        $rules = [
+            'id' => 'required',
+            'name' => 'required',
+            'price' => 'required',
+            'descripcion' => 'required',
+            'state' => 'required',
+
+        ];
+
+        $messages = [
+            'id.required' => "Producto es requerido",
+            'name.required' => "Nombre del area es requerido",
+            'price.required' => "Precio del area es requerido",
+            'descripcion.required' => "descripcion del area es requerido",
+            'state.required' => "state del area es requerido",
+
+        ];
+        $this->validate($request, $rules, $messages);
+        $imagenIcon = $request->file('icon');
+        $imagenBack = $request->file('back');
+        $ldate = date('Y_m_d_H_i_s');
+        $producto = productos::where('id',$request->id)->first();
+        if ($producto == null) {
+            # code...
+            Session::flash('message_error', "error al editar area 1");
+            return back()->withInput();
+        }
+
+        if ($imagenIcon != null) {
+            $path_imagenIcon = public_path() . '/files/fotoIcon';
+            $nombreFile = $request->name . '-' . $ldate . '.png';
+        }
+
+        if ($imagenBack != null) {
+            # code...
+            $path_imagenPortada = public_path() . '/files/fotoPortada';
+            $nombreFilePortada = $request->name . '-' . $ldate . '.png';
+        }
+
+        DB::beginTransaction();
+        try {
+            $area = $producto;
+            $area->producto_name = $request->name;
+            $area->descripcion = $request->descripcion;
+            $area->price = $request->price;
+            $area->tipo_pago = $request->tipo_pago;
+            $area->id_categoria = $request->categoria;
+
+            $area->price = $request->price;
+
+            if ($imagenIcon != null) {
+                $area->foto_logo = $nombreFile;
+                $imagenIcon->move($path_imagenIcon, $nombreFile);
+            }
+
+            if ($imagenBack != null) {
+                $area->foto_back = $nombreFilePortada;
+                $imagenBack->move($path_imagenPortada, $nombreFilePortada);
+            }
+
+            $area->state  = $request->state;
+            $area->save();
+
+
+            DB::commit();
+        } catch (\Throwable $error) {
+            DB::rollback();
+            dd($error);
+            Session::flash('message_error', "error al crear area");
+            return back()->withInput();
+        }
+        Session::flash('message', 'Producto actualziado');
+            return back()->withInput();
     }
 }
