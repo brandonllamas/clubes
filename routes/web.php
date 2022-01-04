@@ -48,6 +48,7 @@ Route::group(['prefix' => 'administrator', 'middleware' => 'auth'], function () 
             Route::get('/preview',  [App\Http\Controllers\Admin\AreasController::class, 'preview'])->name('areas.preview');
             Route::post('/preview',  [App\Http\Controllers\Admin\AreasController::class, 'update'])->name('areas.preview.update');
             Route::post('/create',  [App\Http\Controllers\Admin\AreasController::class, 'store'])->name('areas.create.store');
+            Route::post('/horario',  [App\Http\Controllers\Admin\AreasController::class, 'horario'])->name('areas.create.horario');
         });
 
     });

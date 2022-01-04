@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\area;
 use App\Models\categorias;
+use App\Models\horario_area;
 use App\Models\productos;
 use App\Models\Value_Parameter;
 use Illuminate\Http\Request;
@@ -42,10 +43,16 @@ class AreasController extends Controller
         $area = productos::where('id', $request->area)->first();
         if ($area != null) {
             # code...
-            $dias = ["LUNES","MARTES","MIERCOLES","JUEVES","VIERNES","SABADO","DOMINGO"];
-            $categorias = categorias::where('state',1)->get();
-            $tiposdecompra = Value_Parameter::where('idParameter',3)->where('state',1)->get();
-            return view('admin.area.preview', compact('area','tiposdecompra','categorias','dias'));
+            $dias = ["LUNES", "MARTES", "MIERCOLES", "JUEVES", "VIERNES", "SABADO", "DOMINGO"];
+            $horario = [];
+            foreach ($dias as $key => $value) {
+                # code...
+                $horario[$value] = horario_area::where('id_area',$request->area)
+                ->where('dia',$value)->first();
+            }
+            $categorias = categorias::where('state', 1)->get();
+            $tiposdecompra = Value_Parameter::where('idParameter', 3)->where('state', 1)->get();
+            return view('admin.area.preview', compact('area', 'tiposdecompra', 'categorias', 'dias','horario'));
         } else {
             Session::flash('message_error', "Area no encontrada");
             return back()->withInput();
@@ -144,7 +151,7 @@ class AreasController extends Controller
         $imagenIcon = $request->file('icon');
         $imagenBack = $request->file('back');
         $ldate = date('Y_m_d_H_i_s');
-        $producto = productos::where('id',$request->id)->first();
+        $producto = productos::where('id', $request->id)->first();
         if ($producto == null) {
             # code...
             Session::flash('message_error', "error al editar area 1");
@@ -195,6 +202,53 @@ class AreasController extends Controller
             return back()->withInput();
         }
         Session::flash('message', 'Producto actualziado');
-            return back()->withInput();
+        return back()->withInput();
+    }
+
+    public function horario(Request $request)
+    {
+        # code...
+        $rules = [
+            'id' => 'required'
+        ];
+
+        $messages = [
+            'id.required' => "Producto es requerido",
+        ];
+        $this->validate($request, $rules, $messages);
+        $dias = ["LUNES", "MARTES", "MIERCOLES", "JUEVES", "VIERNES", "SABADO", "DOMINGO"];
+        foreach ($dias as $key => $value) {
+            # code...
+            if ($request["horaInicio_".$value] != null && $request["horafinal_". $value] != null) {
+                # code...
+                DB::beginTransaction();
+                try {
+                    $horario = horario_area::where('dia', $value)
+                    ->where('id_area',$request->id)
+                    ->first();
+                    // dd($horario);
+                    if ($horario == null) {
+                        # code...
+                        $horario = new horario_area();
+                    }
+
+                    $horario->id_area = $request->id;
+                    $horario->dia = $value;
+                    $horario->horainicio = $request["horaInicio_" . $value];
+                    $horario->horafinal =  $request["horafinal_" . $value];
+
+                    $horario->save();
+
+                    DB::commit();
+                } catch (\Throwable $error) {
+                    DB::rollback();
+                    dd($error);
+                    Session::flash('message_error', "error al crear area");
+                    return back()->withInput();
+                }
+            }
+        }
+        Session::flash('message', "Horario actualizado");
+        return back()->withInput();
     }
 }

@@ -199,46 +199,70 @@
                 </div>
 
                 <div class="card-body">
-                    <form action="" method="post">
+                    <form action="{{ route('areas.create.horario') }}" method="post">
                         @csrf
                         {{-- Lunes --}}
+                        <input type="hidden" name="id" value="{{ $area->id }}">
                         @foreach ($dias as $item)
 
-                        <div class="row">
-                            <strong> {{ $item }}</strong>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <div class="mb-3">
-                                    <label for="exampleFormControlTextarea1" class="form-label">Hora Inicio <span
-                                            class="text-center text-danger">*</span></label>
-                                    <select class="form-select form-label" aria-label="Default select example"
-                                        name="horaInicio_{{ $item }}">
-                                        @for ($i = 1; $i < 24; $i = $i + 2)
-                                            <option>{{ $i }}</option>
-                                        @endfor
-                                    </select>
+                            <div class="row">
+                                <strong> {{ $item }}</strong>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="mb-3">
+                                        <label for="exampleFormControlTextarea1" class="form-label">Hora Inicio <span
+                                                class="text-center text-danger">*</span></label>
+                                        <select class="form-select form-label" aria-label="Default select example"
+                                            name="horaInicio_{{ $item }}">
+                                            @for ($i = 1; $i < 24; $i = $i + 2)
+                                                @if ($horario[$item] != null)
+                                                    @if ($horario[$item]->horainicio == $i)
+                                                        <option selected value="{{ $i }}">{{ $i }}
+                                                        </option>
+                                                    @else
+                                                        <option value="{{ $i }}">{{ $i }}
+                                                        </option>
+                                                    @endif
+                                                @else
+                                                    <option value="{{ $i }}">{{ $i }}
+
+                                                @endif
+
+                                            @endfor
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col">
+                                    <div class="mb-3">
+                                        <label for="exampleFormControlTextarea1" class="form-label">Hora Final <span
+                                                class="text-center text-danger">*</span></label>
+                                        <select class="form-select form-label" aria-label="Default select example"
+                                            name="horafinal_{{ $item }}">
+                                            @for ($i = 1; $i < 24; $i = $i + 2)
+                                                @if ($horario[$item] != null)
+                                                    @if ($horario[$item]->horafinal == $i)
+                                                        <option selected value="{{ $i }}">{{ $i }}
+                                                        </option>
+                                                    @else
+                                                        <option value="{{ $i }}">{{ $i }}
+                                                        </option>
+                                                    @endif
+                                                @else
+                                                    <option value="{{ $i }}">{{ $i }}
+
+                                                @endif
+                                            @endfor
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
-
-                            <div class="col">
-                                <div class="mb-3">
-                                    <label for="exampleFormControlTextarea1" class="form-label">Hora Final <span
-                                            class="text-center text-danger">*</span></label>
-                                    <select class="form-select form-label" aria-label="Default select example"
-                                        name="horafinal_{{ $item }}">
-                                        @for ($i = 1; $i < 24; $i = $i + 2)
-                                            <option>{{ $i }}</option>
-                                        @endfor
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-
                         @endforeach
 
-
-
+                        <div class="d-grid gap-2">
+                            <button class="btn btn-primary" type="submit">Actualizar</button>
+                        </div>
 
                     </form>
                 </div>
