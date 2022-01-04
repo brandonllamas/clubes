@@ -150,6 +150,7 @@ class ClientController extends Controller
             // $trabajador = new User;
             $trabajador->name = $request->name;
             $trabajador->lastname = $request->lastname;
+            $trabajador->situacion = $request->situacion;
             if ($request->password != null) {
                 $trabajador->password = Hash::make($request->password);
             }

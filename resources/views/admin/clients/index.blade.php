@@ -72,6 +72,7 @@
                                     <th>Nombre</th>
                                     <th>Apellido</th>
                                     <th>Correo</th>
+                                    <th>Situacion</th>
                                     <th>Estado</th>
                                     <th>Accion</th>
                                 </tr>
@@ -83,6 +84,7 @@
                                         <td>{{ $item->name }}</td>
                                         <td>{{ $item->lastname }}</td>
                                         <td>{{ $item->email }}</td>
+                                        <td>{{ $item->situacion }}</td>
                                         <td>
                                             <form action="{{ route('cliente.create.activate') }}" method="post">
                                                 @csrf
