@@ -79,7 +79,7 @@
                                 @foreach ($area as $key => $item)
                                     <tr>
                                         <td>{{ $item->id }}</td>
-                                        <td>{{ $item->area_name }}</td>
+                                        <td>{{ $item->producto_name }}</td>
                                         <td>{{ $item->price }}</td>
                                         <td>
                                             <form action="{{ route('cliente.create.activate') }}" method="post">
