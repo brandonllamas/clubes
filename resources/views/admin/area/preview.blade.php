@@ -278,10 +278,44 @@
                 </div>
 
                 <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <form action="" method="post">
+                                @csrf
+                                <input type="hidden" name="id_producto" id="id_producto">
+
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="mb-3">
+                                            <label for="exampleFormControlInput1" class="form-label">Nombre producto
+                                                <span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" id="name_producto"
+                                                name="name_producto" placeholder="Nombre producto">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="exampleFormControlInput1" class="form-label">price producto
+                                                <span class="text-danger">*</span></label>
+                                            <input type="number" class="form-control" id="price_producto"
+                                                name="price_producto" min="0" placeholder="Nombre producto">
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="d-grid gap-2">
+                                                <button class="btn btn-primary" type="submit">Actualizar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                            </form>
+                        </div>
+                    </div>
+
 
                 </div>
             </div>
         </div>
+    </div>
     </div>
 
 @endsection
